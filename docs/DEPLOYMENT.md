@@ -58,6 +58,13 @@ Gemini 모델은 종종 새 버전으로 교체되며 이전 모델이 예고 �
 지정한 모델이 더 이상 제공되지 않는 것이니, [Gemini API 모델 목록](https://ai.google.dev/gemini-api/docs/models)에서
 현재 사용 가능한 모델(주로 `flash-lite`가 가장 저렴함)로 `.env`의 `GEMINI_MODEL` 값을 바꿔주면 됩니다.
 
+## 모델 이름 관련 문제 해결
+
+Gemini 모델은 종종 새 버전으로 교체되며 이전 모델이 예고 없이 사라지기도 합니다.
+`분석 실패 ... 404 ... is not found for API version` 같은 에러가 보이면 `GEMINI_MODEL`에
+지정한 모델이 더 이상 제공되지 않는 것이니, [Gemini API 모델 목록](https://ai.google.dev/gemini-api/docs/models)에서
+현재 사용 가능한 모델(주로 `flash-lite`가 가장 저렴함)로 `.env`의 `GEMINI_MODEL` 값을 바꿔주면 됩니다.
+
 ## 알려진 제약 / 향후 개선 사항
 
 - **스케줄러 중복 실행**: 현재 주기 실행(APScheduler)은 컨테이너(프로세스) 하나를
