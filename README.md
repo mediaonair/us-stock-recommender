@@ -29,6 +29,17 @@
 - `release/*`: 릴리스 준비 브랜치입니다. `develop`에서 분기하여 최종 점검 후 `main`과 `develop`에 병합합니다.
 - `hotfix/*`: 운영 중 긴급 수정을 위한 브랜치입니다. `main`에서 분기하여 수정 후 `main`과 `develop`에 병합합니다.
 
+## 시작하기
+
+```bash
+cp .env.example .env  # GEMINI_API_KEY 등 값 채워넣기
+docker compose up --build
+```
+
+## 개발 로드맵
+
+단계별 개발 계획은 [docs/ROADMAP.md](./docs/ROADMAP.md)를 참고하세요.
+
 ## 프로젝트 상태
 
-현재 초기 설정 단계이며, 기능 구현 내용은 추후 업데이트될 예정입니다.
+현재 0단계(프로젝트 기반 설정) 진행 중입니다. 자세한 내용은 [docs/ROADMAP.md](./docs/ROADMAP.md)를 참고하세요.
