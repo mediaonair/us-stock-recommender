@@ -43,4 +43,4 @@ docker compose up --build
 
 ## 프로젝트 상태
 
-현재 2단계(뉴스 분석 모듈) 진행 중입니다. 자세한 내용은 [docs/ROADMAP.md](./docs/ROADMAP.md)를 참고하세요.
+현재 3단계(종목 추천 로직) 진행 중입니다. 자세한 내용은 [docs/ROADMAP.md](./docs/ROADMAP.md)를 참고하세요.
