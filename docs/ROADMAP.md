@@ -35,8 +35,8 @@
 - `AgentState`로 단계 간 상태 전달, 개별 단계 실패는 각 모듈에서 흡수해 전체 흐름은 항상 완주
 
 ### 5단계 — 인터페이스 / 실행 (`feature/api-interface`)
-- 추천 결과를 조회할 수 있는 API 또는 실행 스크립트 작성
-- 주기 실행(스케줄링) 방식 결정
+- FastAPI로 `/recommendations`, `/health` 조회 API 작성 (`src/api.py`)
+- APScheduler로 주기 실행(기본 6시간 간격, `REFRESH_INTERVAL_HOURS`로 조정) 구현, 결과는 캐싱해 매 요청마다 재계산하지 않음
 
 ### 6단계 — 테스트 및 배포 준비 (`feature/testing-deployment`)
 - 주요 모듈에 대한 테스트 작성
@@ -48,4 +48,5 @@
 - 1단계(뉴스 수집 모듈): 완료 — yfinance 기반 종목 뉴스 수집 구현
 - 2단계(뉴스 분석 모듈): 완료 — LiteLLM + Gemini로 요약/감성/이슈 분석, gemini-embedding-001 임베딩 구현
 - 3단계(종목 추천 로직): 완료 — 감성 평균 × 언급량 가중치 기반 1차 스코어링 구현
-- 4단계(LangGraph 워크플로우 통합): 진행 중 — collect/analyze/recommend를 하나의 그래프로 연결
+- 4단계(LangGraph 워크플로우 통합): 완료 — collect/analyze/recommend를 하나의 그래프로 연결
+- 5단계(인터페이스 / 실행): 진행 중 — FastAPI 조회 API + APScheduler 주기 실행 구현
