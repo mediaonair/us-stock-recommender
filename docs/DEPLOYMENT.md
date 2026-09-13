@@ -29,7 +29,7 @@ curl http://localhost:8000/health          # 헬스체크
 curl http://localhost:8000/recommendations # 최신 추천 결과 조회
 ```
 
-1회성으로 전체 파이프라인(수집 → 분석 → 추천)을 콘솔에서 바로 확인하려면:
+1회성으로 전체 파이프라인(수집  분석  추천)을 콘솔에서 바로 확인하려면:
 
 ```bash
 docker compose exec agent python -m src.main
@@ -50,13 +50,6 @@ pytest
 
 `main`/`develop`에 push하거나 PR을 올리면 `.github/workflows/test.yml`을 통해
 GitHub Actions에서도 자동으로 테스트가 실행됩니다.
-
-## 모델 이름 관련 문제 해결
-
-Gemini 모델은 종종 새 버전으로 교체되며 이전 모델이 예고 없이 사라지기도 합니다.
-`분석 실패 ... 404 ... is not found for API version` 같은 에러가 보이면 `GEMINI_MODEL`에
-지정한 모델이 더 이상 제공되지 않는 것이니, [Gemini API 모델 목록](https://ai.google.dev/gemini-api/docs/models)에서
-현재 사용 가능한 모델(주로 `flash-lite`가 가장 저렴함)로 `.env`의 `GEMINI_MODEL` 값을 바꿔주면 됩니다.
 
 ## 모델 이름 관련 문제 해결
 
