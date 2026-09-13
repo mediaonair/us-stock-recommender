@@ -5,5 +5,10 @@ litellm
 # 뉴스 수집 (무료 소스: Yahoo Finance)
 yfinance
 
+# API 인터페이스 및 주기 실행(스케줄링)
+fastapi
+uvicorn[standard]
+apscheduler
+
 # 환경 변수 관리
 python-dotenv

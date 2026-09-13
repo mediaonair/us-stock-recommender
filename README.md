@@ -18,6 +18,7 @@
   - 베이스 모델: Gemini 계열 (LiteLLM을 통해 호출)
   - 임베딩: `gemini-embedding-001`
 - **뉴스 수집**: 별도 API 키가 필요 없는 무료 소스인 [yfinance](https://github.com/ranaroussi/yfinance)(Yahoo Finance)를 사용합니다.
+- **API / 스케줄링**: FastAPI로 추천 결과 조회 API를, APScheduler로 주기적인 재계산(기본 6시간 간격)을 제공합니다.
 - 세부 서비스 구성 및 아키텍처는 프로젝트가 진행되며 이 문서에 추가될 예정입니다.
 
 ## 브랜치 전략 (Git Flow)
@@ -37,10 +38,23 @@ cp .env.example .env  # GEMINI_API_KEY 등 값 채워넣기
 docker compose up --build
 ```
 
+서버가 뜨면 아래 API로 추천 결과를 조회할 수 있습니다. (시작 시 1회, 이후 `REFRESH_INTERVAL_HOURS` 간격으로 자동 재계산됩니다.)
+
+```bash
+curl http://localhost:8000/recommendations
+curl http://localhost:8000/health
+```
+
+1회성으로 콘솔에서 전체 파이프라인을 확인하고 싶다면:
+
+```bash
+docker compose exec agent python -m src.main
+```
+
 ## 개발 로드맵
 
 단계별 개발 계획은 [docs/ROADMAP.md](./docs/ROADMAP.md)를 참고하세요.
 
 ## 프로젝트 상태
 
-현재 4단계(LangGraph 워크플로우 통합) 진행 중입니다. 자세한 내용은 [docs/ROADMAP.md](./docs/ROADMAP.md)를 참고하세요.
+현재 5단계(인터페이스 / 실행) 진행 중입니다. 자세한 내용은 [docs/ROADMAP.md](./docs/ROADMAP.md)를 참고하세요.
