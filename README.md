@@ -51,10 +51,20 @@ curl http://localhost:8000/health
 docker compose exec agent python -m src.main
 ```
 
-## 개발 로드맵
+## 테스트
 
-단계별 개발 계획은 [docs/ROADMAP.md](./docs/ROADMAP.md)를 참고하세요.
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+## 개발 로드맵 / 배포
+
+- 단계별 개발 계획: [docs/ROADMAP.md](./docs/ROADMAP.md)
+- 배포/운영 가이드(환경 변수, 실행 명령, 알려진 제약 등): [docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md)
 
 ## 프로젝트 상태
 
-현재 5단계(인터페이스 / 실행) 진행 중입니다. 자세한 내용은 [docs/ROADMAP.md](./docs/ROADMAP.md)를 참고하세요.
+0~6단계(프로젝트 기반 설정부터 테스트/배포 준비까지)가 모두 진행되어 기본적인
+수집 → 분석 → 추천 파이프라인과 API, 테스트, 배포 문서가 갖춰진 상태입니다.
+자세한 내용과 다음 개선 방향은 [docs/ROADMAP.md](./docs/ROADMAP.md)를 참고하세요.
