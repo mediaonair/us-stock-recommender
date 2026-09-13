@@ -2,5 +2,8 @@
 langgraph
 litellm
 
+# 뉴스 수집 (무료 소스: Yahoo Finance)
+yfinance
+
 # 환경 변수 관리
 python-dotenv

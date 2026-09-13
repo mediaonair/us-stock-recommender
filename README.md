@@ -17,6 +17,7 @@
 - **LLM / 임베딩 모델**: 비용 효율을 고려해 기본 모델은 Gemini 계열을 사용합니다.
   - 베이스 모델: Gemini 계열 (LiteLLM을 통해 호출)
   - 임베딩: `gemini-embedding-001`
+- **뉴스 수집**: 별도 API 키가 필요 없는 무료 소스인 [yfinance](https://github.com/ranaroussi/yfinance)(Yahoo Finance)를 사용합니다.
 - 세부 서비스 구성 및 아키텍처는 프로젝트가 진행되며 이 문서에 추가될 예정입니다.
 
 ## 브랜치 전략 (Git Flow)
@@ -42,4 +43,4 @@ docker compose up --build
 
 ## 프로젝트 상태
 
-현재 0단계(프로젝트 기반 설정) 진행 중입니다. 자세한 내용은 [docs/ROADMAP.md](./docs/ROADMAP.md)를 참고하세요.
+현재 1단계(뉴스 수집 모듈) 진행 중입니다. 자세한 내용은 [docs/ROADMAP.md](./docs/ROADMAP.md)를 참고하세요.
