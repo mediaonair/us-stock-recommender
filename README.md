@@ -38,12 +38,17 @@ cp .env.example .env  # GEMINI_API_KEY 등 값 채워넣기
 docker compose up --build
 ```
 
-서버가 뜨면 아래 API로 추천 결과를 조회할 수 있습니다. (시작 시 1회, 이후 `REFRESH_INTERVAL_HOURS` 간격으로 자동 재계산됩니다.)
+서버가 뜨면 브라우저에서 `http://localhost:8000` 에 접속해 추천 종목을 카드 형태로
+볼 수 있는 웹 대시보드를 확인할 수 있습니다. (시작 시 1회, 이후 `REFRESH_INTERVAL_HOURS`
+간격으로 자동 재계산되며, 대시보드는 60초마다 자동 새로고침됩니다.)
 
 ```bash
 curl http://localhost:8000/recommendations
 curl http://localhost:8000/health
 ```
+
+API를 직접 살펴보고 싶다면 `http://localhost:8000/docs` 에서 FastAPI가 자동으로
+제공하는 대화형 문서(Swagger UI)를 사용할 수 있습니다.
 
 1회성으로 콘솔에서 전체 파이프라인을 확인하고 싶다면:
 
@@ -65,9 +70,9 @@ pytest
 
 ## 프로젝트 상태
 
-**현재 버전: v0.1.0** (`main` 기준 첫 정식 릴리스)
+**최근 정식 릴리스: v0.1.0** (`main` 기준)
 
-0~6단계(프로젝트 기반 설정부터 테스트/배포 준비까지)가 모두 진행되어 기본적인
-수집 → 분석 → 추천 파이프라인과 API, 테스트, 배포 문서가 갖춰진 상태입니다.
-자세한 내용과 다음 개선 방향은 [docs/ROADMAP.md](./docs/ROADMAP.md)와
-[CHANGELOG.md](./CHANGELOG.md)를 참고하세요.
+0~6단계(프로젝트 기반 설정부터 테스트/배포 준비까지)에 이어 7단계(웹 대시보드)까지
+`develop`에 반영되어, 수집 → 분석 → 추천 파이프라인과 API, 웹 대시보드, 테스트,
+배포 문서가 갖춰진 상태입니다. 자세한 내용과 다음 개선 방향은
+[docs/ROADMAP.md](./docs/ROADMAP.md)와 [CHANGELOG.md](./CHANGELOG.md)를 참고하세요.

@@ -2,3 +2,4 @@
 
 # 테스트
 pytest
+httpx  # FastAPI TestClient 의존성

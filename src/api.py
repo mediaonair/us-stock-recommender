@@ -16,7 +16,9 @@ from datetime import datetime, timezone
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from fastapi import FastAPI
+from fastapi.responses import HTMLResponse
 
+from src.dashboard import render_dashboard
 from src.workflow import run_workflow
 
 # 몇 시간마다 추천 결과를 새로 계산할지 (기본값: 6시간)
@@ -51,6 +53,7 @@ async def lifespan(app: FastAPI):
         "interval",
         hours=REFRESH_INTERVAL_HOURS,
         id="refresh_recommendations",
+        replace_existing=True,
     )
     _scheduler.start()
     yield
@@ -58,6 +61,12 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(title="us-stock-recommender", lifespan=lifespan)
+
+
+@app.get("/", response_class=HTMLResponse)
+def dashboard() -> str:
+    """추천 결과를 표/카드 형태로 보여주는 간단한 웹 대시보드."""
+    return render_dashboard(refresh_interval_hours=REFRESH_INTERVAL_HOURS)
 
 
 @app.get("/health")

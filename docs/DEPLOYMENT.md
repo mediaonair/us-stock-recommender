@@ -29,6 +29,11 @@ curl http://localhost:8000/health          # 헬스체크
 curl http://localhost:8000/recommendations # 최신 추천 결과 조회
 ```
 
+브라우저에서 확인할 때는 아래 화면들을 사용하면 됩니다.
+
+- `http://localhost:8000/` — 추천 종목을 카드 형태로 보여주는 웹 대시보드 (60초마다 자동 새로고침)
+- `http://localhost:8000/docs` — FastAPI 자동 생성 대화형 API 문서 (Swagger UI)
+
 1회성으로 전체 파이프라인(수집 → 분석 → 추천)을 콘솔에서 바로 확인하려면:
 
 ```bash
