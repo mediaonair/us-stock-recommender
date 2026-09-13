@@ -17,6 +17,8 @@
 - **LLM / 임베딩 모델**: 비용 효율을 고려해 기본 모델은 Gemini 계열을 사용합니다.
   - 베이스 모델: Gemini 계열 (LiteLLM을 통해 호출)
   - 임베딩: `gemini-embedding-001`
+- **뉴스 수집**: 별도 API 키가 필요 없는 무료 소스인 [yfinance](https://github.com/ranaroussi/yfinance)(Yahoo Finance)를 사용합니다.
+- **API / 스케줄링**: FastAPI로 추천 결과 조회 API를, APScheduler로 주기적인 재계산(기본 6시간 간격)을 제공합니다.
 - 세부 서비스 구성 및 아키텍처는 프로젝트가 진행되며 이 문서에 추가될 예정입니다.
 
 ## 브랜치 전략 (Git Flow)
@@ -29,6 +31,43 @@
 - `release/*`: 릴리스 준비 브랜치입니다. `develop`에서 분기하여 최종 점검 후 `main`과 `develop`에 병합합니다.
 - `hotfix/*`: 운영 중 긴급 수정을 위한 브랜치입니다. `main`에서 분기하여 수정 후 `main`과 `develop`에 병합합니다.
 
+## 시작하기
+
+```bash
+cp .env.example .env  # GEMINI_API_KEY 등 값 채워넣기
+docker compose up --build
+```
+
+서버가 뜨면 아래 API로 추천 결과를 조회할 수 있습니다. (시작 시 1회, 이후 `REFRESH_INTERVAL_HOURS` 간격으로 자동 재계산됩니다.)
+
+```bash
+curl http://localhost:8000/recommendations
+curl http://localhost:8000/health
+```
+
+1회성으로 콘솔에서 전체 파이프라인을 확인하고 싶다면:
+
+```bash
+docker compose exec agent python -m src.main
+```
+
+## 테스트
+
+```bash
+pip install -r requirements-dev.txt
+pytest
+```
+
+## 개발 로드맵 / 배포
+
+- 단계별 개발 계획: [docs/ROADMAP.md](./docs/ROADMAP.md)
+- 배포/운영 가이드(환경 변수, 실행 명령, 알려진 제약 등): [docs/DEPLOYMENT.md](./docs/DEPLOYMENT.md)
+
 ## 프로젝트 상태
 
-현재 초기 설정 단계이며, 기능 구현 내용은 추후 업데이트될 예정입니다.
+**현재 버전: v0.1.0** (`main` 기준 첫 정식 릴리스)
+
+0~6단계(프로젝트 기반 설정부터 테스트/배포 준비까지)가 모두 진행되어 기본적인
+수집 → 분석 → 추천 파이프라인과 API, 테스트, 배포 문서가 갖춰진 상태입니다.
+자세한 내용과 다음 개선 방향은 [docs/ROADMAP.md](./docs/ROADMAP.md)와
+[CHANGELOG.md](./CHANGELOG.md)를 참고하세요.
