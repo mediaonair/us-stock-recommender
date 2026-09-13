@@ -65,6 +65,9 @@ pytest
 
 ## 프로젝트 상태
 
+**현재 버전: v0.1.0** (`main` 기준 첫 정식 릴리스)
+
 0~6단계(프로젝트 기반 설정부터 테스트/배포 준비까지)가 모두 진행되어 기본적인
 수집 → 분석 → 추천 파이프라인과 API, 테스트, 배포 문서가 갖춰진 상태입니다.
-자세한 내용과 다음 개선 방향은 [docs/ROADMAP.md](./docs/ROADMAP.md)를 참고하세요.
+자세한 내용과 다음 개선 방향은 [docs/ROADMAP.md](./docs/ROADMAP.md)와
+[CHANGELOG.md](./CHANGELOG.md)를 참고하세요.
