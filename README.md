@@ -14,6 +14,9 @@
 - **AI 에이전트 오픈소스**: 자체 구현 대신 검증된 오픈소스 프레임워크를 적극 활용합니다.
   - [LangGraph](https://github.com/langchain-ai/langgraph): 뉴스 수집 → 분석 → 종목 추천으로 이어지는 에이전트 워크플로우를 그래프 형태로 구성하고 상태를 관리합니다.
   - [LiteLLM](https://github.com/BerriAI/litellm): 여러 LLM 제공자(OpenAI, Anthropic 등)를 하나의 인터페이스로 호출할 수 있도록 추상화하여, 모델 교체·비용 관리를 유연하게 합니다.
+- **LLM / 임베딩 모델**: 비용 효율을 고려해 기본 모델은 Gemini 계열을 사용합니다.
+  - 베이스 모델: Gemini 계열 (LiteLLM을 통해 호출)
+  - 임베딩: `gemini-embedding-001`
 - 세부 서비스 구성 및 아키텍처는 프로젝트가 진행되며 이 문서에 추가될 예정입니다.
 
 ## 브랜치 전략 (Git Flow)
