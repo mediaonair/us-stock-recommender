@@ -10,7 +10,7 @@
 | 변수 | 설명 | 기본값 |
 | --- | --- | --- |
 | `GEMINI_API_KEY` | LiteLLM이 Gemini 계열 모델을 호출할 때 사용하는 API 키. 비어있으면 뉴스 분석/추천 단계는 빈 결과로 넘어갑니다. | (없음) |
-| `GEMINI_MODEL` | 뉴스 분석에 사용할 베이스 모델 (LiteLLM 모델명 형식) | `gemini/gemini-1.5-flash` |
+| `GEMINI_MODEL` | 뉴스 분석에 사용할 베이스 모델 (LiteLLM 모델명 형식) | `gemini/gemini-2.5-flash-lite` |
 | `EMBEDDING_MODEL` | 임베딩 생성에 사용할 모델 | `gemini/gemini-embedding-001` |
 | `REFRESH_INTERVAL_HOURS` | 추천 결과를 몇 시간마다 재계산할지 | `6` |
 
@@ -50,6 +50,13 @@ pytest
 
 `main`/`develop`에 push하거나 PR을 올리면 `.github/workflows/test.yml`을 통해
 GitHub Actions에서도 자동으로 테스트가 실행됩니다.
+
+## 모델 이름 관련 문제 해결
+
+Gemini 모델은 종종 새 버전으로 교체되며 이전 모델이 예고 없이 사라지기도 합니다.
+`분석 실패 ... 404 ... is not found for API version` 같은 에러가 보이면 `GEMINI_MODEL`에
+지정한 모델이 더 이상 제공되지 않는 것이니, [Gemini API 모델 목록](https://ai.google.dev/gemini-api/docs/models)에서
+현재 사용 가능한 모델(주로 `flash-lite`가 가장 저렴함)로 `.env`의 `GEMINI_MODEL` 값을 바꿔주면 됩니다.
 
 ## 알려진 제약 / 향후 개선 사항
 
