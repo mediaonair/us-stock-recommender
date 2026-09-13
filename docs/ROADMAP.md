@@ -31,8 +31,8 @@
 - 추천 결과 포맷 정의 (`StockRecommendation`)
 
 ### 4단계 — LangGraph 에이전트 워크플로우 통합 (`feature/langgraph-workflow`)
-- 수집 → 분석 → 추천으로 이어지는 전체 흐름을 LangGraph 그래프로 구성
-- 단계 간 상태(State) 정의 및 에러 처리
+- `collect → analyze → recommend` 노드로 이어지는 LangGraph `StateGraph` 구성 (`src/workflow.py`)
+- `AgentState`로 단계 간 상태 전달, 개별 단계 실패는 각 모듈에서 흡수해 전체 흐름은 항상 완주
 
 ### 5단계 — 인터페이스 / 실행 (`feature/api-interface`)
 - 추천 결과를 조회할 수 있는 API 또는 실행 스크립트 작성
@@ -47,4 +47,5 @@
 - 0단계(프로젝트 기반 설정): 완료
 - 1단계(뉴스 수집 모듈): 완료 — yfinance 기반 종목 뉴스 수집 구현
 - 2단계(뉴스 분석 모듈): 완료 — LiteLLM + Gemini로 요약/감성/이슈 분석, gemini-embedding-001 임베딩 구현
-- 3단계(종목 추천 로직): 진행 중 — 감성 평균 × 언급량 가중치 기반 1차 스코어링 구현
+- 3단계(종목 추천 로직): 완료 — 감성 평균 × 언급량 가중치 기반 1차 스코어링 구현
+- 4단계(LangGraph 워크플로우 통합): 진행 중 — collect/analyze/recommend를 하나의 그래프로 연결
