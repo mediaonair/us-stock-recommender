@@ -16,8 +16,10 @@ from src.news_analyzer import NewsAnalysis, analyze_news
 from src.news_collector import NewsItem, collect_news
 from src.stock_recommender import StockRecommendation, recommend_stocks
 
-# 데모에서 실제로 LLM 분석까지 돌려볼 뉴스 개수 (비용 절감을 위해 제한)
-ANALYZE_LIMIT = 3
+# 실제로 LLM 분석까지 돌려볼 뉴스 개수 (전체 수집 결과 중 앞에서부터 자름, 비용 절감을 위해 제한)
+# 값이 너무 작으면(예: 3) 종목이 여러 개일 때 뒤쪽 종목은 분석 대상에 아예 들지 못할 수 있으니,
+# 관심 종목 수 × 분석하고 싶은 종목당 뉴스 수를 고려해 조정한다. (기본 종목 5개 기준 15)
+ANALYZE_LIMIT = 15
 
 
 class AgentState(TypedDict, total=False):
