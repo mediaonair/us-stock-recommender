@@ -43,6 +43,10 @@
 - GitHub Actions(`.github/workflows/test.yml`)로 push/PR 시 자동 테스트
 - `docs/DEPLOYMENT.md`에 배포/운영 가이드(환경 변수, 실행 명령, 알려진 제약) 정리
 
+### 7단계 — 웹 대시보드 (`feature/web-dashboard`)
+- 별도 프론트엔드 빌드 없이 FastAPI가 정적 HTML+JS를 직접 응답하는 방식으로 `/` 대시보드 추가
+- `/recommendations`를 주기적으로 fetch해 종목별 점수/감성/핵심 이슈/헤드라인을 카드로 표시
+
 ## 상태
 
 - 0단계(프로젝트 기반 설정): 완료
@@ -52,8 +56,9 @@
 - 4단계(LangGraph 워크플로우 통합): 완료 — collect/analyze/recommend를 하나의 그래프로 연결
 - 5단계(인터페이스 / 실행): 완료 — FastAPI 조회 API + APScheduler 주기 실행 구현
 - 6단계(테스트 및 배포 준비): 완료 — 단위 테스트, CI, 배포 문서 정리
+- 7단계(웹 대시보드): 완료 — `/`에서 추천 종목을 카드로 보여주는 대시보드 구현
 
-## 향후 개선 아이디어 (0~6단계 이후)
+## 향후 개선 아이디어
 
 - 임베딩 결과를 실제 벡터 저장소(예: Chroma, pgvector)에 저장해 유사 뉴스 검색 지원
 - 여러 인스턴스로 확장할 때를 대비한 스케줄러 분산 처리 (자세한 내용은 docs/DEPLOYMENT.md 참고)
