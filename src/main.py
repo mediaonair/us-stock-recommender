@@ -1,8 +1,8 @@
 """
 us-stock-recommender 에이전트 진입점.
 
-현재는 2단계(뉴스 분석) 데모 단계로, 추천 로직은
-docs/ROADMAP.md의 단계에 따라 이후 feature 브랜치에서 구현됩니다.
+현재는 3단계(종목 추천) 데모 단계로, LangGraph 기반 전체 워크플로우 통합은
+docs/ROADMAP.md의 4단계에서 이어집니다.
 """
 
 import os
@@ -11,6 +11,7 @@ from dotenv import load_dotenv
 
 from src.news_analyzer import analyze_news
 from src.news_collector import collect_news
+from src.stock_recommender import recommend_stocks
 
 load_dotenv()
 
@@ -30,8 +31,8 @@ def main() -> None:
 
     if not os.getenv("GEMINI_API_KEY"):
         print(
-            "GEMINI_API_KEY가 설정되어 있지 않아 뉴스 분석 단계는 건너뜁니다. "
-            ".env에 키를 채워넣으면 분석까지 실행됩니다."
+            "GEMINI_API_KEY가 설정되어 있지 않아 뉴스 분석/추천 단계는 건너뜁니다. "
+            ".env에 키를 채워넣으면 끝까지 실행됩니다."
         )
         return
 
@@ -42,8 +43,17 @@ def main() -> None:
         print(f"  key_issues: {analysis.key_issues}")
         print(f"  embedding dim: {len(analysis.embedding)}")
 
-    # TODO: 분석 결과 -> 종목 추천으로 이어지는 LangGraph 워크플로우 연결
-    # (docs/ROADMAP.md 3~4단계 참고)
+    recommendations = recommend_stocks(analyses)
+    print(f"\n추천 종목 ({len(recommendations)}개, 점수 높은 순):")
+    for rec in recommendations:
+        print(
+            f"- {rec.ticker}: score={rec.score} "
+            f"(avg_sentiment={rec.average_sentiment}, news_count={rec.news_count})"
+        )
+        print(f"  key_issues: {rec.key_issues}")
+
+    # TODO: 수집 -> 분석 -> 추천 전체 흐름을 LangGraph 그래프로 연결
+    # (docs/ROADMAP.md 4단계 참고)
 
 
 if __name__ == "__main__":
