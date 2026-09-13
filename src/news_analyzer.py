@@ -17,7 +17,7 @@ import litellm
 
 from src.news_collector import NewsItem
 
-DEFAULT_MODEL = os.getenv("GEMINI_MODEL", "gemini/gemini-2.5-flash-lite")
+DEFAULT_MODEL = os.getenv("GEMINI_MODEL", "gemini/gemini-3.5-flash-lite")
 DEFAULT_EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "gemini/gemini-embedding-001")
 
 _ANALYSIS_PROMPT = """\

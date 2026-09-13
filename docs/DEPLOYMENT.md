@@ -10,7 +10,7 @@
 | 변수 | 설명 | 기본값 |
 | --- | --- | --- |
 | `GEMINI_API_KEY` | LiteLLM이 Gemini 계열 모델을 호출할 때 사용하는 API 키. 비어있으면 뉴스 분석/추천 단계는 빈 결과로 넘어갑니다. | (없음) |
-| `GEMINI_MODEL` | 뉴스 분석에 사용할 베이스 모델 (LiteLLM 모델명 형식) | `gemini/gemini-2.5-flash-lite` |
+| `GEMINI_MODEL` | 뉴스 분석에 사용할 베이스 모델 (LiteLLM 모델명 형식) | `gemini/gemini-3.5-flash-lite` |
 | `EMBEDDING_MODEL` | 임베딩 생성에 사용할 모델 | `gemini/gemini-embedding-001` |
 | `REFRESH_INTERVAL_HOURS` | 추천 결과를 몇 시간마다 재계산할지 | `6` |
 
@@ -29,7 +29,7 @@ curl http://localhost:8000/health          # 헬스체크
 curl http://localhost:8000/recommendations # 최신 추천 결과 조회
 ```
 
-1회성으로 전체 파이프라인(수집  분석  추천)을 콘솔에서 바로 확인하려면:
+1회성으로 전체 파이프라인(수집 → 분석 → 추천)을 콘솔에서 바로 확인하려면:
 
 ```bash
 docker compose exec agent python -m src.main
@@ -53,10 +53,18 @@ GitHub Actions에서도 자동으로 테스트가 실행됩니다.
 
 ## 모델 이름 관련 문제 해결
 
-Gemini 모델은 종종 새 버전으로 교체되며 이전 모델이 예고 없이 사라지기도 합니다.
-`분석 실패 ... 404 ... is not found for API version` 같은 에러가 보이면 `GEMINI_MODEL`에
-지정한 모델이 더 이상 제공되지 않는 것이니, [Gemini API 모델 목록](https://ai.google.dev/gemini-api/docs/models)에서
-현재 사용 가능한 모델(주로 `flash-lite`가 가장 저렴함)로 `.env`의 `GEMINI_MODEL` 값을 바꿔주면 됩니다.
+Gemini 모델은 종종 새 버전으로 교체되며 이전 모델이 예고 없이(또는 "신규 사용자 제공 중단"
+형태로) 사라지기도 합니다. `분석 실패 ... 404 ... is not found` / `... is no longer available`
+같은 에러가 로그에 보이면 `GEMINI_MODEL`에 지정한 모델이 더 이상 제공되지 않는 것이니,
+[Gemini API 모델 목록](https://ai.google.dev/gemini-api/docs/models)에서 현재 GA(정식 제공)
+상태인 모델(주로 `flash-lite` 계열이 가장 저렴함)로 `.env`의 `GEMINI_MODEL` 값을 바꿔주면
+됩니다. (2026-09 기준 최신 안정 버전: `gemini/gemini-3.5-flash-lite`)
+
+`gemini-flash-latest`, `gemini-flash-lite-latest` 같은 `-latest` 롤링 별칭은 예고 없이(약
+2주 전 통지) 다른 버전으로 바뀔 수 있어 비용/동작이 갑자기 달라질 수 있으므로 프로덕션에서는
+**사용하지 않는 것을 권장**합니다. 대신 지금처럼 구체적인 버전 문자열을 `GEMINI_MODEL`에
+고정(pin)해 두고, Gemini가 해당 모델을 사용 중단할 때마다 이 문서의 안내에 따라 갱신하는
+방식을 유지하세요.
 
 ## 알려진 제약 / 향후 개선 사항
 
