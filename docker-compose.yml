@@ -1,0 +1,9 @@
+services:
+  agent:
+    build: .
+    container_name: us-stock-recommender-agent
+    env_file:
+      - .env
+    volumes:
+      - ./src:/app/src
+    restart: unless-stopped
